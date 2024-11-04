@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Website</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            /* Light background for better contrast */
+            color: #333;
+            /* Default text color */
+        }
+
+        header {
+            background-color: #007bff;
+            padding: 20px;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            color: white;
+        }
+
+        #div1,
+        #div2,
+        #div3 {
+            background-color: #ffffff;
+            /* White background for the project sections */
+            padding: 20px;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            height: auto;
+            /* Adjust height to fit content */
+            width: 80%;
+            /* Limiting width for better readability */
+            margin: 20px auto;
+            /* Centering the divs */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            /* Soft shadow for depth */
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /* Centered container */
+            margin-top: 80px;
+            /* Space for fixed header */
+        }
+
+        footer {
+            background-color: #f1f1f1;
+            padding: 10px;
+            text-align: center;
+            width: 100%;
+            position: relative;
+            box-sizing: border-box;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+            padding: 10px 15px;
+            border: 2px solid #007bff;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+            margin: 5px 0;
+            display: inline-block;
+            /* Block display for better hover area */
+        }
+
+        a:hover {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .intro-text {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .project-description {
+            font-size: 16px;
+            color: #555;
+            margin-top: 10px;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 768px) {
+
+            #div1,
+            #div2,
+            #div3 {
+                width: 90%;
+                /* More width on smaller screens */
+            }
+        }
+
+        /* Animation for links */
+        a {
+            position: relative;
+            overflow: hidden;
+        }
+
+        a::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            height: 2px;
+            width: 0;
+            background: #007bff;
+            transition: width 0.4s ease, left 0.4s ease;
+        }
+
+        a:hover::after {
+            width: 100%;
+            left: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>My Portfolio</h1>
+    </header>
+    <article>
+        <div class="container">
+            <div id="div2"> <!-- Przeniesiony div -->
+                <h1><strong>Hello, I'm Luke</strong></h1>
+                <h2><strong>I'm still learning web development, living in Poland.</strong></h2>
+                <p class="project-description"><strong>As I continue to learn, I enjoy experimenting with different
+                        technologies and tools. My goal is to become a full-stack developer and contribute to meaningful
+                        projects that make a difference.</strong></p>
+            </div>
+            <div id="div1"> <!-- Teraz niższy div -->
+                <h1><strong>I'm a beginner web developer proficient in HTML, CSS, JavaScript, and PHP.</strong></h1>
+                <p class="project-description"><strong>I am passionate about creating beautiful and functional websites.
+                        My journey in web development began as a hobby, and I am now dedicated to expanding my skills
+                        and knowledge in the field.</strong></p>
+            </div>
+            <div id="div3">
+                <p class="intro-text"><strong>Check out my projects below:</strong></p>
+                <a href="kwadraty.html"><strong>Squares</strong></a>
+                <p class="project-description"><strong>A creative project that showcases my skills in CSS and JavaScript
+                        by dynamically generating square shapes on the screen.</strong></p>
+
+                <a href="notatki.html"><strong>Notes</strong></a>
+                <p class="project-description"><strong>This note-taking application allows users to create, edit, and
+                        delete notes using local storage for persistence.</strong></p>
+
+                <a href="galeria.html"><strong>Gallery</strong></a>
+                <p class="project-description"><strong>A gallery project that displays images in a responsive layout,
+                        emphasizing my ability to handle multimedia content effectively.</strong></p>
+            </div>
+        </div>
+    </article>
+    <footer>
+        <p><strong>Contact: </strong><strong>lukasz.rymarczyk2006@gmail.com</strong>
+        </p>
+    </footer>
+</body>
+
+</html>

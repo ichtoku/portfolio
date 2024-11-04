@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Gallery</title> <!-- Page title -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script>
+        $(function () {
+            let currentImageIndex = -1;
+            const images = $(".photos img");
+
+            $(".next, .previous").hide();
+
+            $(".photos img").click(function () {
+                if ($(this).hasClass("zoom")) {
+                    $(this).removeClass("zoom");
+                    $(".photos img").show();
+                    $(".next, .previous").hide();
+                    $(".kliczek").show(); // Show back to portfolio button
+                    $("body").css({ "background-color": "#f0f4f8" });
+                    currentImageIndex = -1;
+                } else {
+                    $(".photos img").hide();
+                    $(this).show().addClass("zoom");
+                    $(".next, .previous").show();
+                    $(".kliczek").hide(); // Hide back to portfolio button
+                    $("body").css({ "background-color": "#e1e4e8" });
+                    currentImageIndex = images.index(this);
+                }
+            });
+
+            $(".previous").click(function () {
+                if (currentImageIndex > 0) {
+                    $(images[currentImageIndex]).removeClass("zoom");
+                    currentImageIndex--;
+                    changeImage(currentImageIndex);
+                }
+            });
+
+            $(".next").click(function () {
+                if (currentImageIndex < images.length - 1) {
+                    $(images[currentImageIndex]).removeClass("zoom");
+                    currentImageIndex++;
+                    changeImage(currentImageIndex);
+                }
+            });
+
+            function changeImage(index) {
+                $(".photos img").hide();
+                $(images[index]).show().addClass("zoom");
+                $(".kliczek").hide(); // Hide back to portfolio button
+            }
+        });
+    </script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background-color: #f0f4f8;
+            /* Changed background color */
+        }
+
+        h1 {
+            margin: 20px 0;
+            font-size: 2em;
+            color: #333;
+            /* Title color */
+        }
+
+        .photos {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .photos img {
+            margin: 5px;
+            border: 5px solid #333;
+            /* Changed border color */
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .zoom {
+            width: 50vw;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+            border: 5px solid #ff6347;
+            /* Changed border color */
+        }
+
+        .previous,
+        .next {
+            background-color: #6c757d;
+            /* Changed button color */
+            border: 3px solid #333;
+            /* Changed border color */
+            border-radius: 20%;
+            width: 100px;
+            height: 30px;
+            color: #fff;
+            /* Changed text color */
+            cursor: pointer;
+            position: absolute;
+            z-index: 10;
+        }
+
+        .previous {
+            top: 50%;
+            left: 20%;
+        }
+
+        .next {
+            top: 50%;
+            right: 20%;
+        }
+
+        .kliczek {
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 10px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .kliczek:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Photo Gallery</h1> <!-- Added title -->
+    <article class="page">
+        <div class="photos">
+            <img class="img1" src="zdj1.jpg" alt="Photo 1" width="20%" height="300">
+            <img class="img2" src="zdj2.jpg" alt="Photo 2" width="20%" height="300">
+            <img class="img3" src="zdj3.jpg" alt="Photo 3" width="20%" height="300">
+            <img class="img4" src="zdj4.jpg" alt="Photo 4" width="20%" height="300">
+            <img class="img5" src="zdj5.jpg" alt="Photo 5" width="20%" height="300">
+        </div>
+    </article>
+    <button class="kliczek" onclick="location.href='Glowna.html';">Back to Portfolio</button>
+
+    <button class="previous">Previous</button>
+    <button class="next">Next</button>
+
+</body>
+
+</html>

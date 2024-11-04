@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Note Taking App</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            font-weight: bold;
+        }
+
+        #note-input {
+            width: calc(100% - 100px);
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 10px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        .note {
+            background-color: #e9ecef;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .note .delete-note {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: #dc3545;
+        }
+
+        .info-text {
+            margin-top: 10px;
+            text-align: center;
+            color: #555;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .contact {
+            margin-top: 20px;
+            color: #555;
+        }
+
+        .back-button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            margin: 20px auto 0;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .back-button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Note Taking App</h1>
+        <input type="text" id="note-input" placeholder="Add a new note">
+        <button id="add-note">Add Note</button>
+        <div class="info-text">Click on a note to edit it.</div>
+        <div id="notes-list" style="margin-top: 20px;"></div>
+        <button class="back-button" onclick="location.href='Glowna.html';">Back to Portfolio</button>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            loadNotes();
+
+            $('#add-note').click(function () {
+                let noteText = $('#note-input').val();
+                if (noteText) {
+                    addNote(noteText);
+                    $('#note-input').val('');
+                }
+            });
+
+            $(document).on('click', '.delete-note', function (event) {
+                event.stopPropagation();
+                let noteIndex = $(this).parent().data('index');
+                deleteNote(noteIndex);
+            });
+
+            $(document).on('click', '.note', function () {
+                let noteIndex = $(this).data('index');
+                let noteText = $(this).contents().get(0).nodeValue.trim();
+                let newNoteText = prompt("Edit note:", noteText);
+                if (newNoteText !== null) {
+                    editNote(noteIndex, newNoteText);
+                }
+            });
+
+            function addNote(noteText) {
+                let notes = getNotes();
+                notes.push(noteText);
+                saveNotes(notes);
+                loadNotes();
+            }
+
+            function deleteNote(index) {
+                let notes = getNotes();
+                notes.splice(index, 1);
+                saveNotes(notes);
+                loadNotes();
+            }
+
+            function editNote(index, newText) {
+                let notes = getNotes();
+                notes[index] = newText;
+                saveNotes(notes);
+                loadNotes();
+            }
+
+            function loadNotes() {
+                let notes = getNotes();
+                $('#notes-list').empty();
+                notes.forEach((note, index) => {
+                    $('#notes-list').append(`
+                        <div class="note" data-index="${index}">
+                            ${note}
+                            <button class="delete-note">X</button>
+                        </div>
+                    `);
+                });
+            }
+
+            function getNotes() {
+                let notes = localStorage.getItem('notes');
+                return notes ? JSON.parse(notes) : [];
+            }
+
+            function saveNotes(notes) {
+                localStorage.setItem('notes', JSON.stringify(notes));
+            }
+        });
+    </script>
+    <footer>
+    </footer>
+</body>
+
+</html>

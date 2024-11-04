@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matching</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.14.0/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.14.0/jquery-ui.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f0f2f5;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            min-height: 100vh;
+            color: #333;
+        }
+
+        h1 {
+            font-size: 36px;
+            color: #4A90E2;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .box,
+        .box2 {
+            text-align: center;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+
+        .box {
+            background-color: #4A90E2;
+            color: #fff;
+            height: 100px;
+            width: 100px;
+        }
+
+        .box2 {
+            background-color: #b0bec5;
+            color: #fff;
+            height: 120px;
+            width: 120px;
+            border: 2px dashed #90a4ae;
+        }
+
+        .box2.green {
+            background-color: #66bb6a !important;
+        }
+
+        .a1 {
+            display: flex;
+            gap: 15px;
+            padding: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .button-container {
+            margin-top: 20px;
+        }
+
+        button {
+            background-color: #4A90E2;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #357ABD;
+        }
+
+        .gratulations {
+            display: none;
+            font-size: 24px;
+            color: #66bb6a;
+            font-weight: bold;
+            margin-top: 20px;
+            text-align: center;
+            padding: 10px;
+            border: 2px solid #66bb6a;
+            border-radius: 8px;
+            background-color: #f1f8e9;
+        }
+    </style>
+    <script>
+        $(function () {
+            let completed = 0;
+
+            $(".box").draggable();
+
+            $(".box2").droppable({
+                drop: function (event, ui) {
+                    var draggedId = ui.draggable.attr("id");
+                    var targetId = $(this).attr("id");
+
+                    if (draggedId === targetId) {
+                        $(this).addClass("ui-state-highlight green");
+                        ui.draggable.fadeOut();
+                        $(this).droppable("disable");
+                        ui.draggable.draggable("disable");
+                        completed++;
+
+                        if (completed === 10) {
+                            $(".gratulations").fadeIn();
+                        }
+                    } else {
+                        ui.draggable.animate({
+                            top: 0,
+                            left: 0
+                        }, "slow");
+                    }
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <h1>Match the Pair</h1>
+    <div class="container">
+        <article class="a1">
+            <div class="box" id="box1">1</div>
+            <div class="box" id="box2">2</div>
+            <div class="box" id="box3">3</div>
+            <div class="box" id="box4">4</div>
+            <div class="box" id="box5">5</div>
+            <div class="box" id="box6">6</div>
+            <div class="box" id="box7">7</div>
+            <div class="box" id="box8">8</div>
+            <div class="box" id="box9">9</div>
+            <div class="box" id="box10">10</div>
+        </article>
+        <article class="a1">
+            <div class="box2" id="box1">one</div>
+            <div class="box2" id="box2">two</div>
+            <div class="box2" id="box3">three</div>
+            <div class="box2" id="box4">four</div>
+            <div class="box2" id="box5">five</div>
+            <div class="box2" id="box6">six</div>
+            <div class="box2" id="box7">seven</div>
+            <div class="box2" id="box8">eight</div>
+            <div class="box2" id="box9">nine</div>
+            <div class="box2" id="box10">ten</div>
+        </article>
+        <div class="button-container">
+            <button onclick="location.reload();">PLAY AGAIN</button>
+        </div>
+        <div class="button-container">
+            <button class="kliczek" onclick="location.href='Glowna.html';">Back to Portfolio</button>
+        </div>
+        <div class="gratulations">Congratulations! You completed the matching!</div>
+    </div>
+</body>
+
+</html>
